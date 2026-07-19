@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBOLIGHT | Hardware Control Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #f0f4f8;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header Bar */
+        header {
+            background: rgba(16, 22, 37, 0.9);
+            border-bottom: 2px solid #0052cc;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #00d2ff 0%, #0052cc 100%);
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #0052cc 0%, #00a3ff 100%);
+            color: white;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.4);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 163, 255, 0.6);
+        }
+
+        /* Hero Splash Banner Section */
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at center, #112244 0%, #0b0f19 70%);
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .hero-section p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Interactive Hardware Showcase Grid Layout */
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #00d2ff;
+            border-left: 4px solid #0052cc;
+            padding-left: 15px;
+        }
+
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Individual Modular Hardware Specs Card */
+        .board-card {
+            background: #101625;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .board-card:hover {
+            border-color: #00d2ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.15);
+        }
+
+        .board-header {
+            margin-bottom: 15px;
+        }
+
+        .board-type {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #00d2ff;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .board-name {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .board-description {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .specs-list {
+            list-style: none;
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            background: #162035;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .specs-list li {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specs-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .specs-label {
+            color: #64748b;
+        }
+
+        .btn-connect {
+            background: transparent;
+            color: #00d2ff;
+            border: 2px solid #0052cc;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-connect:hover {
+            background: #0052cc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Deck -->
+    <header>
+        <div class="logo">ROBOLIGHT</div>
+        <button class="btn-register" onclick="triggerRegistration()">Register Operator</button>
+    </header>
+
+    <!-- Visual Dashboard Intro Splash -->
+    <main>
+        <section class="hero-section">
+            <h1>Hardware Deployment Ecosystem</h1>
+            <p>Welcome to the core configuration matrix. Interface with operational robotic components, verify peripheral pin layouts, and sync hardware nodes directly to your dashboard stack.</p>
+        </section>
+
+        <!-- Dynamic Microcontroller Boards Inventory Layout -->
+        <section class="showcase-container">
+            <h2 class="section-title">Compatible Microcontroller Ecosystem</h2>
+            
+            <div class="board-grid">
+                <!-- Card 1: Advanced Processing Matrix -->
+                <div class="board-card">
+                    <div class="board-header">
+                        <div class="board-type">High Compute Node</div>
+                        <h3 class="board-name">Raspberry Pi 5</h3>
+                        <p class="board-description">Optimized for onboard Computer Vision parsing and localized operational decision routing.</p>
+                    </div>
+                    <div>
+                        <ul class="specs-list">
+                            <li><span class="specs-label">Architecture</span> <span>64-bit Quad-core ARM</span></li>
+                            <li><span class="specs-label">Onboard RAM</span> <span>8GB LPDDR4X</span></li>
+                            <li><span class="specs-label">Wireless</span> <span>Dual-band Wi-Fi + BT 5.0</span></li>
+                        </ul>
+                        <button class="btn-connect" onclick="connectBoard('Raspberry Pi 5')">Link Interface</button>
+                    </div>
+                </div>
+
+                <!-- Card 2: IoT Low-Energy Grid Link -->
+                <div class="board-card">
+                    <div class="board-header">
+                        <div class="board-type">Wireless Telemetry Transceiver</div>
+                        <h3 class="board-name">ESP32-WROOM</h3>
+                        <p class="board-description">Dual-core low-power node ideal for processing distributed sensor arrays and streaming network signals.</p>
+                    </div>
+                    <div>
+                        <ul class="specs-list">
+                            <li><span class="specs-label">Architecture</span> <span>32-bit Xtensa Dual-Core</span></li>
+                            <li><span class="specs-label">Clock Speed</span> <span>240 MHz</span></li>
+                            <li><span class="specs-label">Mesh Networking</span> <span>Wi-Fi + BLE Enabled</span></li>
+                        </ul>
+                        <button class="btn-connect" onclick="connectBoard('ESP32-WROOM')">Link Interface</button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Prototyping Mechanical Logic Core -->
+                <div class="board-card">
+                    <div class="board-header">
+                        <div class="board-type">Logic Controller</div>
+                        <h3 class="board-name">Arduino Uno R4</h3>
+                        <p class="board-description">The industry standard deployment card for motor operations, light controls, and hardware debugging routines.</p>
+                    </div>
+                    <div>
+                        <ul class="specs-list">
+                            <li><span class="specs-label">Processor</span> <span>Renesas RA4M1 (ARM C-M4)</span></li>
+                            <li><span class="specs-label">Operating Volt</span> <span>5V Logic Array</span></li>
+                            <li><span class="specs-label">Digital I/O Pins</span> <span>14 Channels (6 PWM)</span></li>
+                        </ul>
+                        <button class="btn-connect" onclick="connectBoard('Arduino Uno R4')">Link Interface</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Callback actions for control verification
+        function triggerRegistration() {
+            alert("Initializing Operator Registration Subroutine...\nLoading profile generation engine.");
+        }
+
+        function connectBoard(boardName) {
+            alert(`Attempting hardware connection sequence to node: [${boardName}]\nChecking signal responses...`);
+        }
+    </script>
+</body>
+</html>
