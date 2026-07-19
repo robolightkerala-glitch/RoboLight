@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoboLight</title>
+    <title>RoboAcademy - Registration</title>
     <style>
         * {
             margin: 0;
@@ -11,25 +11,32 @@
             box-sizing: border-box;
         }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         .container {
             background: white;
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
+            max-width: 550px;
             width: 100%;
         }
         h1 {
             color: #333;
-            margin-bottom: 30px;
+            margin-bottom: 8px;
             text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
         .control-group {
             margin-bottom: 20px;
@@ -37,45 +44,206 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #555;
+            color: #444;
             font-weight: bold;
+            font-size: 14px;
         }
-        button {
+        input[type="text"],
+        input[type="email"],
+        select {
             width: 100%;
             padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #667eea;
+        }
+        
+        /* Custom Track Selection Radios */
+        .track-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .track-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .track-card input {
+            display: none;
+        }
+        .track-card h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .track-card p {
+            font-size: 12px;
+            color: #777;
+        }
+        /* Active state for card selection */
+        .track-card.selected {
+            border-color: #667eea;
+            background-color: #f3f4ff;
+        }
+
+        /* Live Registration Summary box */
+        .summary-box {
+            background: #f7fafc;
+            border-left: 4px solid #764ba2;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            display: none; /* Shown dynamically via JS */
+        }
+        .summary-box h4 {
+            color: #764ba2;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .summary-box p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
             background: #667eea;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
         }
         button:hover {
             background: #764ba2;
         }
-        input[type="range"] {
-            width: 100%;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>RoboLight Control</h1>
+        <h1>RoboAcademy</h1>
+        <p class="subtitle">Secure your spot in the Fall 2026 Robotics Cohort</p>
         
-        <div class="control-group">
-            <label for="brightness">Brightness</label>
-            <input type="range" id="brightness" min="0" max="100" value="50">
-        </div>
-        
-        <div class="control-group">
-            <button onclick="alert('Power toggled')">Power</button>
-        </div>
-        
-        <div class="control-group">
-            <button onclick="alert('Settings opened')">Settings</button>
-        </div>
+        <form id="registrationForm">
+            <!-- Full Name Input -->
+            <div class="control-group">
+                <label for="fullName">Student Name</label>
+                <input type="text" id="fullName" placeholder="e.g. Alex Mercer" required>
+            </div>
+            
+            <!-- Email Input -->
+            <div class="control-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="alex@example.com" required>
+            </div>
+
+            <!-- Experience Level Dropdown -->
+            <div class="control-group">
+                <label for="experience">Experience Level</label>
+                <select id="experience" required>
+                    <option value="" disabled selected>Select your experience...</option>
+                    <option value="Beginner (No coding background)">Beginner (No coding background)</option>
+                    <option value="Intermediate (Some Arduino/Python)">Intermediate (Some Arduino/Python)</option>
+                    <option value="Advanced (ROS / C++ proficiency)">Advanced (ROS / C++ proficiency)</option>
+                </select>
+            </div>
+            
+            <!-- Custom Radio Selection for Robot Specialization Track -->
+            <div class="control-group">
+                <label>Select Robotics Track</label>
+                <div class="track-options">
+                    <label class="track-card" id="cardCombat">
+                        <input type="radio" name="robotTrack" value="Combat & Combatants" required>
+                        <h3>Combat Bots</h3>
+                        <p>Mechanics & Weaponry</p>
+                    </label>
+                    <label class="track-card" id="cardAI">
+                        <input type="radio" name="robotTrack" value="Autonomous AI Rovers">
+                        <h3>AI Rovers</h3>
+                        <p>Computer Vision & Pathing</p>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dynamic Summary View Component -->
+            <div class="summary-box" id="summaryBox">
+                <h4>Registration Review:</h4>
+                <p id="summaryText"></p>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="control-group">
+                <button type="submit">Complete Registration</button>
+            </div>
+        </form>
     </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const trackCards = document.querySelectorAll('.track-card');
+        const summaryBox = document.getElementById('summaryBox');
+        const summaryText = document.getElementById('summaryText');
+        
+        // Listeners for managing custom radio card visual styling
+        trackCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Clear previous selections
+                trackCards.forEach(c => c.classList.remove('selected'));
+                // Toggle active selected style group
+                this.classList.add('selected');
+                updateSummary();
+            });
+        });
+
+        // Live text summary updating listener 
+        const inputs = document.querySelectorAll('#fullName, #email, #experience');
+        inputs.forEach(input => {
+            input.addEventListener('input', updateSummary);
+        });
+
+        function updateSummary() {
+            const name = document.getElementById('fullName').value;
+            const experience = document.getElementById('experience').value;
+            const selectedTrack = document.querySelector('input[name="robotTrack"]:checked');
+
+            if (name || experience || selectedTrack) {
+                summaryBox.style.display = 'block';
+                summaryText.innerHTML = `
+                    <strong>Student:</strong> ${name || '...'} <br>
+                    <strong>Tier:</strong> ${experience || '...'} <br>
+                    <strong>Track Focus:</strong> ${selectedTrack ? selectedTrack.value : '...'}
+                `;
+            } else {
+                summaryBox.style.display = 'none';
+            }
+        }
+
+        // Form Submission Logic
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const studentName = document.getElementById('fullName').value;
+            const trackSelected = document.querySelector('input[name="robotTrack"]:checked').value;
+            
+            alert(`Congratulations ${studentName}! You have successfully registered for the ${trackSelected} class.`);
+            
+            form.reset();
+            trackCards.forEach(c => c.classList.remove('selected'));
+            summaryBox.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
