@@ -24,17 +24,17 @@
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            max-width: 600px;
+            max-width: 450px;
             width: 100%;
         }
         
-        /* Logo / Header Branding */
+        /* Branding Identity */
         .brand-header {
             text-align: center;
             margin-bottom: 30px;
         }
         .brand-logo {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
             letter-spacing: 2px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -46,297 +46,90 @@
             font-size: 14px;
         }
 
-        /* Progress Steps Visual Indicator */
-        .steps-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 35px;
-            position: relative;
-        }
-        .steps-indicator::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #e2e8f0;
-            z-index: 1;
-            transform: translateY(-50%);
-        }
-        .step-dot {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #e2e8f0;
-            color: #777;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-        .step-dot.active {
-            background: #667eea;
-            color: white;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-        }
-        .step-dot.completed {
-            background: #48bb78;
-            color: white;
-        }
-
-        /* Dynamic Flow Panels */
-        .panel {
-            display: none;
-        }
-        .panel.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            color: #333;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        
-        /* Form Element Standard Styling */
+        /* Form Controls */
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: #555;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
         }
         input[type="text"],
-        input[type="password"] {
+        input[type="number"] {
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
             border-radius: 6px;
             outline: none;
-            font-size: 14px;
+            font-size: 15px;
             transition: border-color 0.3s;
         }
         input:focus {
             border-color: #667eea;
         }
 
-        /* Option Blocks for Mode Selection */
-        .mode-option {
-            border: 2px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .mode-option:hover {
-            border-color: #667eea;
-            background: #f7fafc;
-        }
-        .mode-option input {
-            margin-right: 10px;
-        }
-        .mode-option strong {
-            color: #333;
-            display: inline-block;
-            margin-bottom: 2px;
-        }
-        .mode-option p {
-            font-size: 13px;
-            color: #666;
-            padding-left: 24px;
-        }
-
-        /* Navigation Button Actions */
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
         button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .btn-primary {
+            width: 100%;
+            padding: 14px;
             background: #667eea;
             color: white;
-            flex-grow: 1;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
         }
-        .btn-primary:hover {
+        button:hover {
             background: #764ba2;
-        }
-        .btn-secondary {
-            background: #edf2f7;
-            color: #4a5568;
-        }
-        .btn-secondary:hover {
-            background: #e2e8f0;
-        }
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Branding Identity -->
+        <!-- Brand Header -->
         <div class="brand-header">
             <div class="brand-logo">ROBOLIGHT</div>
-            <p>Let's configure your hardware ecosystem</p>
+            <p>Create your operator profile to begin</p>
         </div>
 
-        <!-- Step Tracking Header Matrix -->
-        <div class="steps-indicator">
-            <div class="step-dot active" id="dot-1">1</div>
-            <div class="step-dot" id="dot-2">2</div>
-            <div class="step-dot" id="dot-3">3</div>
-        </div>
-
-        <!-- Setup Pipeline Form Container -->
-        <form id="onboardingForm" onsubmit="event.preventDefault();">
-            
-            <!-- Step 1: Profile Initialization -->
-            <div class="panel active" id="panel-1">
-                <h2>Step 1: Create your Pilot Profile</h2>
-                <div class="input-group">
-                    <label for="username">Pilot / Operator Name</label>
-                    <input type="text" id="username" placeholder="Enter name or team identifier" required>
-                </div>
-                <div class="input-group">
-                    <label for="Age">Hardware Security Key</label>
-                    <input type="password" id="secretKey" placeholder="Age" required>
-                </div>
+        <!-- Setup Form -->
+        <form id="startForm">
+            <!-- Name Input -->
+            <div class="input-group">
+                <label for="operatorName">Full Name</label>
+                <input type="text" id="operatorName" placeholder="e.g. Alex Mercer" required>
             </div>
 
-            <!-- Step 2: Local Mesh Environment Setup -->
-            <div class="panel" id="panel-2">
-                <h2>Step 2: Age</h2>
-                <div class="input-group">
-                    <label for="Age">Age</label>
-                    <input type="text" id="Age" placeholder="Enter your age">
-                </div>
-                <div class="input-group">
-                    <label for="Phone">Phone Number</label>
-                    <input type="telephone" id="Phone" placeholder="Enter Phone number">
-                </div>
+            <!-- Age Input -->
+            <div class="input-group">
+                <label for="operatorAge">Age</label>
+                <input type="number" id="operatorAge" placeholder="e.g. 24" min="1" max="120" required>
             </div>
 
-            <!-- Step 3: Hardware Core Configuration Profile Selection -->
-            <div class="panel" id="panel-3">
-                <h2>Step 3: You Got A Indrudution Class</h2>
-                
-                <label class="mode-option">
-                    <input type="radio" name="robotMode" value="Yes" checked>
-                    <strong>Yes</strong>
-                    <p>Robot runs on internal light-mapping algorithms and object detection.</p>
-                </label>
-
-                <label class="mode-option">
-                    <input type="radio" name="robotMode" value="No">
-                    <strong>No</strong>
-                    <p>Direct live override via control deck web panels and custom scripts.</p>
-                </label>
-            </div>
-
-            <!-- Pipeline Engine Navigation Core Controls -->
-            <div class="action-buttons">
-                <button type="button" class="btn-secondary" id="prevBtn" disabled>Back</button>
-                <button type="button" class="btn-primary" id="nextBtn">Continue</button>
-            </div>
+            <!-- Launch Action Button -->
+            <button type="submit">Launch Dashboard</button>
         </form>
     </div>
 
     <script>
-        let currentStep = 1;
-        const totalSteps = 3;
-
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const form = document.getElementById('onboardingForm');
-
-        nextBtn.addEventListener('click', () => {
-            // Basic layout form tracking validation before step switching
-            const currentInputs = document.querySelectorAll(`#panel-${currentStep} input`);
-            let valid = true;
-            currentInputs.forEach(input => {
-                if(input.hasAttribute('required') && !input.value) {
-                    valid = false;
-                    input.reportValidity();
-                }
-            });
-
-            if(!valid) return;
-
-            if (currentStep < totalSteps) {
-                // Adjust old state dot to completed style state
-                document.getElementById(`dot-${currentStep}`).classList.remove('active');
-                document.getElementById(`dot-${currentStep}`).classList.add('completed');
-                
-                // Switch panel view
-                document.getElementById(`panel-${currentStep}`).classList.remove('active');
-                currentStep++;
-                document.getElementById(`panel-${currentStep}`).classList.add('active');
-                
-                // Update new active dot element styling state
-                document.getElementById(`dot-${currentStep}`).classList.add('active');
-            } else {
-                // Terminal final submission step execution
-                const operator = document.getElementById('username').value;
-                const modeSelected = document.querySelector('input[name="robotMode"]:checked').value;
-                
-                alert(`System Initialized!\nWelcome aboard, Operator ${operator}.\nYour ROBOLIGHT unit is deploying in [${modeSelected}] mode.`);
-                window.location.reload(); // Restarts the onboard cycle demo state
-            }
+        document.getElementById('startForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            updateNavigationButtons();
+            const name = document.getElementById('operatorName').value;
+            const age = document.getElementById('operatorAge').value;
+            
+            // Simple submission callback demo
+            alert(`Welcome to ROBOLIGHT, ${name} (${age})!\nYour control profile has been created successfully.`);
+            
+            // Optional: Reset form fields after alert
+            this.reset();
         });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentStep > 1) {
-                document.getElementById(`dot-${currentStep}`).classList.remove('active');
-                document.getElementById(`panel-${currentStep}`).classList.remove('active');
-                
-                currentStep--;
-                
-                document.getElementById(`panel-${currentStep}`).classList.add('active');
-                document.getElementById(`dot-${currentStep}`).classList.remove('completed');
-                document.getElementById(`dot-${currentStep}`).classList.add('active');
-            }
-            
-            updateNavigationButtons();
-        });
-
-        function updateNavigationButtons() {
-            // Manage disabling back tracking button logic
-            prevBtn.disabled = (currentStep === 1);
-            
-            // Swap text labels for terminal action button
-            if (currentStep === totalSteps) {
-                nextBtn.textContent = 'Launch System';
-            } else {
-                nextBtn.textContent = 'Continue';
-            }
-        }
     </script>
 </body>
 </html>
