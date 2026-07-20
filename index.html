@@ -3,134 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started | ROBOLIGHT</title>
+    <title>ROBO LIGHT - Enter Portal</title>
     <style>
+        :root {
+            --bg-color: #060b19;
+            --panel-bg: rgba(10, 25, 47, 0.7);
+            --primary-blue: #00d2ff;
+            --glow-blue: #00d2ff88;
+            --text-color: #e2f1ff;
+            --error-red: #ff3366;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            overflow: hidden;
+            position: relative;
         }
-        .container {
-            background: white;
+
+        /* Sci-fi background grid lines */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            top: -50%;
+            animation: gridMove 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
+        }
+
+        /* Main Glassmorphism Container */
+        .login-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--primary-blue);
+            box-shadow: 0 0 25px var(--glow-blue);
+            border-radius: 16px;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            max-width: 450px;
             width: 100%;
-        }
-        
-        /* Branding Identity */
-        .brand-header {
+            max-width: 450px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .login-card.error-shake {
+            animation: shake 0.4s ease-in-out;
+            border-color: var(--error-red);
+            box-shadow: 0 0 25px rgba(255, 51, 102, 0.5);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        /* Logo and Typography */
+        .logo-container {
             margin-bottom: 30px;
         }
-        .brand-logo {
-            font-size: 32px;
+
+        .logo-text {
+            font-size: 2.5rem;
             font-weight: 800;
+            letter-spacing: 4px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-blue), 0 0 20px var(--primary-blue);
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #88a9c4;
+            margin-top: 5px;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-        .brand-header p {
-            color: #777;
-            font-size: 14px;
         }
 
-        /* Form Controls */
+        /* Form Inputs */
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            text-align: left;
         }
+
         label {
             display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 8px;
-            color: #555;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
-            outline: none;
-            font-size: 15px;
-            transition: border-color 0.3s;
-        }
-        input:focus {
-            border-color: #667eea;
+            color: var(--primary-blue);
         }
 
-        button {
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Error Message text */
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.85rem;
+            margin-top: 6px;
+            display: none;
+        }
+
+        /* Futuristic Button */
+        .enter-btn {
             width: 100%;
             padding: 14px;
-            background: #667eea;
-            color: white;
+            background: linear-gradient(45deg, #0072ff, var(--primary-blue));
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+            transition: all 0.3s ease;
         }
-        button:hover {
-            background: #764ba2;
+
+        .enter-btn:hover {
+            box-shadow: 0 0 20px var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .enter-btn:active {
+            transform: translateY(1px);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Brand Header -->
-        <div class="brand-header">
-            <textarea class="brand-logo" rows="1" readonly color="white">ROBOLIGHT</textarea>
-            <p>Create your operator profile to begin</p>
+    <div class="login-card" id="mainCard">
+        <div class="logo-container">
+            <h1 class="logo-text">Robo Light</h1>
+            <p class="subtitle">Intelligence Amplified</p>
         </div>
 
-        <!-- Setup Form -->
-        <form id="startForm">
-            <!-- Name Input -->
+        <form id="accessForm" onsubmit="validateAndEnter(event)">
             <div class="input-group">
-                <label for="operatorName">Full Name</label>
-                <input type="text" id="operatorName" placeholder="e.g. Alex Mercer" required>
+                <label for="userName">Identity Authentication</label>
+                <input 
+                    type="text" 
+                    id="userName" 
+                    placeholder="Enter your name to initialize..." 
+                    autocomplete="off"
+                >
+                <div class="error-message" id="errorTxt">Access Denied: Please enter your name to initialize system.</div>
             </div>
 
-            <!-- Age Input -->
-            <div class="input-group">
-                <label for="operatorAge">Age</label>
-                <input type="number" id="operatorAge" placeholder="e.g. 24" min="1" max="120" required>
-            </div>
-
-            <!-- Launch Action Button -->
-            <button type="submit"><a href="main.html">Launch Dashboard</a></button>
+            <button type="submit" class="enter-btn">Initialize Portal</button>
         </form>
     </div>
 
     <script>
-        document.getElementById('startForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function validateAndEnter(event) {
+            // Prevent the form from submitting and refreshing the page automatically
+            event.preventDefault();
             
-            const name = document.getElementById('operatorName').value;
-            const age = document.getElementById('operatorAge').value;
+            const nameInput = document.getElementById('userName');
+            const errorTxt = document.getElementById('errorTxt');
+            const mainCard = document.getElementById('mainCard');
             
-            // Simple submission callback demo
-            alert(`Welcome to ROBOLIGHT, ${name} (${age})!\nYour control profile has been created successfully.`);
-            
-            // Optional: Reset form fields after alert
-            this.reset();
-        });
+            // Clean up whitespace to make sure they didn't just type spaces
+            const username = nameInput.value.trim();
+
+            if (username === "") {
+                // Trigger the error visuals
+                errorTxt.style.display = "block";
+                mainCard.classList.add('error-shake');
+                nameInput.style.borderColor = "var(--error-red)";
+                
+                // Remove the shake animation class after it plays so it can be re-triggered
+                setTimeout(() => {
+                    mainCard.classList.remove('error-shake');
+                }, 400);
+            } else {
+                // Reset errors if they fix it
+                errorTxt.style.display = "none";
+                nameInput.style.borderColor = "rgba(0, 210, 255, 0.3)";
+                
+                // SUCCESS! 
+                // For now, it alerts a welcome message. 
+                // In production, you would change window.location.href to your main dashboard page.
+                alert(`Welcome to ROBO LIGHT, ${username}. Access Granted.`);
+                
+                // Example redirection (uncomment the line below and add your actual homepage link):
+                // window.location.href = "dashboard.html";
+            }
+        }
     </script>
 </body>
 </html>
