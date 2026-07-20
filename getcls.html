@@ -140,6 +140,7 @@
                 placeholder="00000000"
                 autocomplete="off"
                 oninput="validateNumeric(this)"
+                onkeydown="handleKeyPress(event)"
             >
         </div>
 
@@ -154,25 +155,36 @@
             input.value = input.value.replace(/[^0-9]/g, '');
         }
 
+        // Checks if user pressed the "Enter" key
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                submitClassCode();
+            }
+        }
+
         // Processing Action Matrix
         function submitClassCode() {
             const codeField = document.getElementById('classCode');
             const enteredCode = codeField.value;
 
+            // Step 1: Check length
             if (enteredCode.length !== 8) {
                 alert("Access Denied: Please enter a valid 8-digit class verification code.");
                 return;
             }
 
-            alert(`Verifying access key: [${enteredCode}]...\nSyncing your class stream data!`);
-            // Add redirect logic here if needed:
-            // window.location.href = "https://yourlink.com/class?id=" + enteredCode;
+            // Step 2: Validate the specific target code
+            if (enteredCode === "14673498") {
+                // Change "class-room.html" to whatever page filename or URL you want to open!
+                window.location.href = "class.html";
+            } else {
+                alert("Access Denied: Invalid class registration code.");
+                codeField.value = ""; // Clears the input field if wrong
+            }
         }
 
         function goBack() {
-            // Returns back to the primary workspace page
             window.history.back();
-            // Or use direct link fallback if needed: window.location.href = "index.html";
         }
     </script>
 </body>

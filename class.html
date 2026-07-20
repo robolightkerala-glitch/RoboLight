@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBOLIGHT | Robotics Classroom Workspace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #060b13;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        /* Header Layout */
+        header {
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #101f38;
+            padding-bottom: 20px;
+        }
+
+        .brand-section h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #00d2ff 0%, #0077ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-section p {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .btn-logout {
+            background: #101b2d;
+            border: 1px solid #1e3a66;
+            color: #00d2ff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background: #0077ff;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 119, 255, 0.4);
+        }
+
+        /* Grid Configuration */
+        .projects-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        /* Square Project Button Container */
+        .project-card {
+            background: #0d1726;
+            border: 1px solid #1a2e4c;
+            border-radius: 12px;
+            aspect-ratio: 1 / 1; /* Forces strict square layout */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow);
+        }
+
+        /* Visual Thumbnail Matrix */
+        .thumbnail-area {
+            flex: 1.1;
+            background: #111e33;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #162947;
+            overflow: hidden;
+        }
+
+        /* Tech HUD Graphic Overlay inside Thumbnail */
+        .hud-overlay {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 1px dashed rgba(0, 210, 255, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 42px;
+            opacity: 0.7;
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(6, 11, 19, 0.85);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #ffffff;
+            border: 1px solid var(--accent-color);
+        }
+
+        /* Project Metadata Content */
+        .card-content {
+            flex: 0.9;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #0a1220;
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .hardware-tag {
+            font-size: 12px;
+            color: #94a3b8;
+            background: #13223a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .sensor-tag {
+            font-size: 11px;
+            color: #38bdf8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Color Code Themes */
+        .theme-cyan { --accent-color: #00d2ff; --accent-glow: rgba(0, 210, 255, 0.3); }
+        .theme-purple { --accent-color: #a855f7; --accent-glow: rgba(168, 85, 247, 0.3); }
+        .theme-emerald { --accent-color: #10b981; --accent-glow: rgba(16, 185, 129, 0.3); }
+        .theme-amber { --accent-color: #f59e0b; --accent-glow: rgba(245, 158, 11, 0.3); }
+        .theme-rose { --accent-color: #f43f5e; --accent-glow: rgba(244, 63, 94, 0.3); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-section">
+            <h1>ROBOLIGHT PORTAL</h1>
+            <p>Class Stream Verified &bull; 50 Active Lab Modules Loaded</p>
+        </div>
+        <button class="btn-logout" onclick="exitWorkspace()">Exit Workspace</button>
+    </header>
+
+    <!-- 50 Project Container Node Elements Injection Zone -->
+    <main class="projects-grid" id="projectsContainer"></main>
+
+    <script>
+        // Datasets to distribute across all 50 square button configurations dynamically
+        const boards = ["Arduino Uno R3", "Raspberry Pi 4", "ESP32 NodeMCU", "Micro:bit v2", "Arduino Nano Every"];
+        const sensors = [
+            "Ultrasonic Distance Sensor", 
+            "MPU-6050 Gyroscope", 
+            "DHT11 Temp & Humidity", 
+            "HC-SR501 PIR Motion", 
+            "TCS3200 Color Sensor",
+            "IR Line Tracking Array",
+            "MQ-2 Gas & Smoke Detector",
+            "LDR Light Dependent Resistor"
+        ];
+        const themes = ["theme-cyan", "theme-purple", "theme-emerald", "theme-amber", "theme-rose"];
+        const icons = ["🤖", "⚙️", "🛰️", "🎮", "🏎️", "🔋", "📡", "👁️"];
+
+        const container = document.getElementById('projectsContainer');
+
+        // Loop array matrix sequence to automatically compile all 50 modules
+        for (let i = 1; i <= 50; i++) {
+            // Distribute assets deterministically based on index loop numbers
+            const selectedTheme = themes[(i - 1) % themes.length];
+            const selectedBoard = boards[(i - 1) % boards.length];
+            const selectedSensor = sensors[(i + 2) % sensors.length];
+            const selectedIcon = icons[(i - 1) % icons.length];
+
+            // Card DOM Architecture Blueprint
+            const card = document.createElement('div');
+            card.className = `project-card ${selectedTheme}`;
+            card.onclick = () => launchProject(i);
+
+            card.innerHTML = `
+                <div class="thumbnail-area">
+                    <span class="project-badge">LAB ${String(i).padStart(2, '0')}</span>
+                    <div class="hud-overlay">${selectedIcon}</div>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="project-title">Project ${i}</div>
+                        <span class="hardware-tag">⚙️ ${selectedBoard}</span>
+                    </div>
+                    <div class="sensor-tag">📟 ${selectedSensor}</div>
+                </div>
+            `;
+
+            container.appendChild(card);
+        }
+
+        // Action Trigger Routes
+        function launchProject(projectId) {
+            alert(`Initializing Neural Link...\nOpening Project Room ${projectId} source terminal.`);
+            // Hook up link changes here if you make separate subfiles:
+            // window.location.href = `project-lab.html?id=${projectId}`;
+        }
+
+        function exitWorkspace() {
+            // Routes standard execution stack backwards to the gateway setup page
+            window.location.href = "main.html"; 
+        }
+    </script>
+</body>
+</html>
