@@ -22,7 +22,7 @@
         header {
             background: rgba(16, 22, 37, 0.9);
             border-bottom: 2px solid #0052cc;
-            padding: 20px 40px;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,6 +39,46 @@
             background: linear-gradient(135deg, #00d2ff 0%, #0052cc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Top Bar Auth Buttons Container */
+        .auth-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-signin {
+            background: transparent;
+            color: #00d2ff;
+            border: 1px solid #0052cc;
+        }
+
+        .btn-signin:hover {
+            background: rgba(0, 82, 204, 0.15);
+            border-color: #00d2ff;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #0052cc 0%, #00a3ff 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(0, 163, 255, 0.4);
         }
 
         /* Hero Splash Banner Section */
@@ -218,6 +258,99 @@
             background: #0052cc;
             color: white;
         }
+
+        /* Class Access Code Gateway Section (Hidden by Default) */
+        .gateway-section {
+            display: none;
+            background: #101625;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            margin: 40px auto 0 auto;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .gateway-section h3 {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .code-input {
+            width: 100%;
+            background: #162035;
+            border: 2px solid #1e293b;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 24px;
+            color: #ffffff;
+            text-align: center;
+            letter-spacing: 6px;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .code-input:focus {
+            border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        .code-input::placeholder {
+            letter-spacing: normal;
+            font-size: 15px;
+            color: #64748b;
+            font-weight: normal;
+        }
+
+        .gateway-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-back {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background: #162035;
+            color: #ffffff;
+            border-color: #64748b;
+        }
     </style>
 </head>
 <body>
@@ -225,6 +358,11 @@
     <!-- Top Navigation Deck -->
     <header>
         <div class="logo">ROBOLIGHT</div>
+        <!-- Right-aligned Auth Buttons inside Appbar -->
+        <div class="auth-container">
+            <button class="auth-btn btn-signin" onclick="handleAuth('Sign In')">Sign In</button>
+            <button class="auth-btn btn-login" onclick="handleAuth('Log In')">Log In</button>
+        </div>
     </header>
 
     <!-- Visual Dashboard Intro Splash -->
@@ -241,86 +379,138 @@
             <!-- Three Interactive Action Buttons Above Title -->
             <div class="action-menu">
                 <button class="menu-btn btn-blue" onclick="triggerRegistration()">Register</button>
-                <button class="menu-btn btn-purple" onclick="getClass()">Get Class</button>
+                <button class="menu-btn btn-purple" onclick="showGateway()">Get Class</button>
                 <button class="menu-btn btn-green" onclick="joinWhatsapp()">Join on WhatsApp Group</button>
             </div>
 
-            <h2 class="section-title">Compatible Microcontroller Ecosystem</h2>
-            
-            <div class="board-grid">
-                <!-- Card 1: Advanced Processing Matrix -->
-                <div class="board-card">
-                    <div class="board-header">
-                        <div class="board-type">High Compute Node</div>
-                        <h3 class="board-name">Raspberry Pi 5</h3>
-                        <p class="board-description">Optimized for onboard Computer Vision parsing and localized operational decision routing.</p>
+            <!-- Primary View: Ecosystem Grid -->
+            <div id="ecosystemView">
+                <h2 class="section-title">Compatible Microcontroller Ecosystem</h2>
+                
+                <div class="board-grid">
+                    <!-- Card 1: Advanced Processing Matrix -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">High Compute Node</div>
+                            <h3 class="board-name">Raspberry Pi 5</h3>
+                            <p class="board-description">Optimized for onboard Computer Vision parsing and localized operational decision routing.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Architecture</span> <span>64-bit Quad-core ARM</span></li>
+                                <li><span class="specs-label">Onboard RAM</span> <span>8GB LPDDR4X</span></li>
+                                <li><span class="specs-label">Wireless</span> <span>Dual-band Wi-Fi + BT 5.0</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Raspberry Pi 5')">Link Interface</button>
+                        </div>
                     </div>
-                    <div>
-                        <ul class="specs-list">
-                            <li><span class="specs-label">Architecture</span> <span>64-bit Quad-core ARM</span></li>
-                            <li><span class="specs-label">Onboard RAM</span> <span>8GB LPDDR4X</span></li>
-                            <li><span class="specs-label">Wireless</span> <span>Dual-band Wi-Fi + BT 5.0</span></li>
-                        </ul>
-                        <button class="btn-connect" onclick="connectBoard('Raspberry Pi 5')">Link Interface</button>
-                    </div>
-                </div>
 
-                <!-- Card 2: IoT Low-Energy Grid Link -->
-                <div class="board-card">
-                    <div class="board-header">
-                        <div class="board-type">Wireless Telemetry Transceiver</div>
-                        <h3 class="board-name">ESP32-WROOM</h3>
-                        <p class="board-description">Dual-core low-power node ideal for processing distributed sensor arrays and streaming network signals.</p>
+                    <!-- Card 2: IoT Low-Energy Grid Link -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Wireless Telemetry Transceiver</div>
+                            <h3 class="board-name">ESP32-WROOM</h3>
+                            <p class="board-description">Dual-core low-power node ideal for processing distributed sensor arrays and streaming network signals.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Architecture</span> <span>32-bit Xtensa Dual-Core</span></li>
+                                <li><span class="specs-label">Clock Speed</span> <span>240 MHz</span></li>
+                                <li><span class="specs-label">Mesh Networking</span> <span>Wi-Fi + BLE Enabled</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('ESP32-WROOM')">Link Interface</button>
+                        </div>
                     </div>
-                    <div>
-                        <ul class="specs-list">
-                            <li><span class="specs-label">Architecture</span> <span>32-bit Xtensa Dual-Core</span></li>
-                            <li><span class="specs-label">Clock Speed</span> <span>240 MHz</span></li>
-                            <li><span class="specs-label">Mesh Networking</span> <span>Wi-Fi + BLE Enabled</span></li>
-                        </ul>
-                        <button class="btn-connect" onclick="connectBoard('ESP32-WROOM')">Link Interface</button>
-                    </div>
-                </div>
 
-                <!-- Card 3: Prototyping Mechanical Logic Core -->
-                <div class="board-card">
-                    <div class="board-header">
-                        <div class="board-type">Logic Controller</div>
-                        <h3 class="board-name">Arduino Uno R4</h3>
-                        <p class="board-description">The industry standard deployment card for motor operations, light controls, and hardware debugging routines.</p>
-                    </div>
-                    <div>
-                        <ul class="specs-list">
-                            <li><span class="specs-label">Processor</span> <span>Renesas RA4M1 (ARM C-M4)</span></li>
-                            <li><span class="specs-label">Operating Volt</span> <span>5V Logic Array</span></li>
-                            <li><span class="specs-label">Digital I/O Pins</span> <span>14 Channels (6 PWM)</span></li>
-                        </ul>
-                        <button class="btn-connect" onclick="connectBoard('Arduino Uno R4')">Link Interface</button>
+                    <!-- Card 3: Prototyping Mechanical Logic Core -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Logic Controller</div>
+                            <h3 class="board-name">Arduino Uno R4</h3>
+                            <p class="board-description">The industry standard deployment card for motor operations, light controls, and hardware debugging routines.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Processor</span> <span>Renesas RA4M1 (ARM C-M4)</span></li>
+                                <li><span class="specs-label">Operating Volt</span> <span>5V Logic Array</span></li>
+                                <li><span class="specs-label">Digital I/O Pins</span> <span>14 Channels (6 PWM)</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Arduino Uno R4')">Link Interface</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Alternate View: 8-Digit Access Code Gateway -->
+            <div id="gatewayView" class="gateway-section">
+                <h3>Enter Class Access Code</h3>
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        class="code-input" 
+                        id="classCode" 
+                        maxlength="8" 
+                        placeholder="00000000"
+                        autocomplete="off"
+                        oninput="validateNumeric(this)"
+                    >
+                </div>
+                <div class="gateway-actions">
+                    <button class="btn-submit" onclick="submitClassCode()">Get Class</button>
+                    <button class="btn-back" onclick="hideGateway()">Back</button>
+                </div>
+            </div>
+
         </section>
     </main>
 
     <script>
-        // Core Menu Actions
+        // Core Navigation Switches
+        function showGateway() {
+            document.getElementById('ecosystemView').style.display = 'none';
+            document.getElementById('gatewayView').style.display = 'block';
+        }
+
+        function hideGateway() {
+            document.getElementById('gatewayView').style.display = 'none';
+            document.getElementById('ecosystemView').style.display = 'block';
+            // Clear code input field on back action
+            document.getElementById('classCode').value = '';
+        }
+
+        // Filters text inputs to keep numbers only
+        function validateNumeric(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+        // Core Menu Redirections
         function triggerRegistration() {
             window.open("https://docs.google.com/forms/d/e/1FAIpQLSc1WAQ4YJgGkZ9iIhWyh5InMvUMGzDxUwwpwwtJbUH8qjsfxQ/viewform?usp=publish-editor", "_blank");
         }
 
-        function getClass() {
-            
-            // Add your class page destination path here when ready, e.g.:
-            // window.location.href = "classes.html";
-        }
-
         function joinWhatsapp() {
-            
-            // Add your exact WhatsApp invite URL link inside the quotes below:
             window.open("https://chat.whatsapp.com/EKAteMQmGahFxSwZVvtnPc?s=cl&p=a&mlu=4&amv=1", "_blank");
         }
 
-        // Hardware Card Actions
+        // Authentication trigger alert
+        function handleAuth(type) {
+            alert(`Initializing system integration sequence for: [${type}]\nRedirecting to secure login gateway...`);
+        }
+
+        // Code Verification Execution
+        function submitClassCode() {
+            const codeField = document.getElementById('classCode');
+            const enteredCode = codeField.value;
+
+            if (enteredCode.length !== 8) {
+                alert("Access Denied: Please input a valid 8-digit verification code.");
+                return;
+            }
+
+            alert(`Verifying access key: [${enteredCode}]...\nConnecting to your class stream profile!`);
+        }
+
+        // Hardware Card Subroutines
         function connectBoard(boardName) {
             alert(`Attempting hardware connection sequence to node: [${boardName}]\nChecking signal responses...`);
         }
