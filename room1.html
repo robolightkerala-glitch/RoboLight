@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBOLIGHT | Project Room 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #060b13;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .room-container {
+            background: #0d1726;
+            border: 1px solid #00d2ff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .meta {
+            color: #00d2ff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .content-box {
+            background: #0a1220;
+            border: 1px solid #1a2e4c;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .btn-back {
+            background: #101b2d;
+            border: 1px solid #1e3a66;
+            color: #94a3b8;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: #0077ff;
+            color: white;
+            border-color: #0077ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="room-container">
+        <h1>🤖 Project Room 1</h1>
+        <p class="meta">Hardware: Arduino Uno R3 &bull; Sensor: Ultrasonic Distance Sensor</p>
+        
+        <div class="content-box">
+            <h3>Lab Instructions:</h3>
+            <p style="margin-top: 10px; color: #94a3b8; line-height: 1.6;">
+                Welcome to your first robotics lab! In this module, you will wire your Arduino Uno to the Ultrasonic sensor to measure distances and avoid obstacles. Follow the steps provided by your instructor to begin coding.
+            </p>
+        </div>
+
+        <button class="btn-back" onclick="goBack()">Return to Hub</button>
+    </div>
+
+    <script>
+        function goBack() {
+            // Sends the user back to the 50-project dashboard screen
+            window.location.href = "class-room.html";
+        }
+    </script>
+</body>
+</html>

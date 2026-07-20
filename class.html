@@ -238,11 +238,16 @@
         }
 
         // Action Trigger Routes
-        function launchProject(projectId) {
-            alert(`Initializing Neural Link...\nOpening Project Room ${projectId} source terminal.`);
-            // Hook up link changes here if you make separate subfiles:
-            // window.location.href = `project-lab.html?id=${projectId}`;
-        }
+        // Action Trigger Routes
+function launchProject(projectId) {
+    if (projectId === 1) {
+        // Redirect Project 1 to its own special page
+        window.location.href = "room1.html";
+    } else {
+        // A placeholder alert for the other rooms until you build them
+        alert(`Initializing Neural Link...\nOpening Project Room ${projectId} source terminal.`);
+    }
+}
 
         function exitWorkspace() {
             // Routes standard execution stack backwards to the gateway setup page
