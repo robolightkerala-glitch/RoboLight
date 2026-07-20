@@ -37,24 +37,8 @@
             font-weight: 800;
             letter-spacing: 2px;
             background: linear-gradient(135deg, #00d2ff 0%, #0052cc 100%);
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .btn-register {
-            background: linear-gradient(135deg, #0052cc 0%, #00a3ff 100%);
-            color: white;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.4);
-        }
-
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 163, 255, 0.6);
         }
 
         /* Hero Splash Banner Section */
@@ -84,6 +68,56 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
+        }
+
+        /* Menu Button Row Layout */
+        .action-menu {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            flex: 1;
+            min-width: 160px;
+            text-align: center;
+        }
+
+        /* Distinct Color Actions */
+        .btn-blue {
+            background: linear-gradient(135deg, #0052cc 0%, #00a3ff 100%);
+            box-shadow: 0 4px 15px rgba(0, 82, 204, 0.4);
+        }
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 163, 255, 0.6);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+        }
+        .btn-purple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #1f9d55 0%, #2ecc71 100%);
+            box-shadow: 0 4px 15px rgba(31, 157, 85, 0.4);
+        }
+        .btn-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
         }
 
         .section-title {
@@ -191,7 +225,6 @@
     <!-- Top Navigation Deck -->
     <header>
         <div class="logo">ROBOLIGHT</div>
-        <button class="btn-register" onclick="triggerRegistration()"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc1WAQ4YJgGkZ9iIhWyh5InMvUMGzDxUwwpwwtJbUH8qjsfxQ/viewform?usp=publish-editor" target="_blank">Register Operator</a></button>
     </header>
 
     <!-- Visual Dashboard Intro Splash -->
@@ -200,13 +233,18 @@
             <h1>RoBoLight Kerala</h1>
             <p>Welcome to the core configuration matrix. Interface with operational robotic components, verify peripheral pin layouts, and sync hardware nodes directly to your dashboard stack.</p>
         </section>
-        <header class="brand-header">
-            <div class="brand-logo">ROBOLIGHT</div>
-            <button>Get Class</button>
-        </header>
+        
 
-        <!-- Dynamic Microcontroller Boards Inventory Layout -->
+        <!-- Dynamic Showcase Layout -->
         <section class="showcase-container">
+            
+            <!-- Three Interactive Action Buttons Above Title -->
+            <div class="action-menu">
+                <button class="menu-btn btn-blue" onclick="triggerRegistration()">Register</button>
+                <button class="menu-btn btn-purple" onclick="getClass()">Get Class</button>
+                <button class="menu-btn btn-green" onclick="joinWhatsapp()">Join on WhatsApp Group</button>
+            </div>
+
             <h2 class="section-title">Compatible Microcontroller Ecosystem</h2>
             
             <div class="board-grid">
@@ -265,11 +303,25 @@
     </main>
 
     <script>
-        // Callback actions for control verification
+        // Core Menu Actions
         function triggerRegistration() {
             alert("Initializing Operator Registration Subroutine...\nLoading profile generation engine.");
+            window.open("https://docs.google.com/forms/d/e/1FAIpQLSc1WAQ4YJgGkZ9iIhWyh5InMvUMGzDxUwwpwwtJbUH8qjsfxQ/viewform?usp=publish-editor", "_blank");
         }
 
+        function getClass() {
+            alert("Fetching available robotic courses and schedules...");
+            // Add your class page destination path here when ready, e.g.:
+            // window.location.href = "classes.html";
+        }
+
+        function joinWhatsapp() {
+            alert("Redirecting to the official RoBoLight Kerala WhatsApp community...");
+            // Add your exact WhatsApp invite URL link inside the quotes below:
+            window.open("https://chat.whatsapp.com/your-invite-code-here", "_blank");
+        }
+
+        // Hardware Card Actions
         function connectBoard(boardName) {
             alert(`Attempting hardware connection sequence to node: [${boardName}]\nChecking signal responses...`);
         }
