@@ -3,97 +3,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBOLIGHT | Project Room 1</title>
+    <title>ROBOLIGHT | Advanced Ultrasonic & LED Array Project</title>
     <style>
+        /* Color Palette & Reset */
+        :root {
+            --bg-dark: #0a1118;
+            --card-bg: #121e2b;
+            --accent-blue: #00d2ff;
+            --primary-blue: #0072ff;
+            --text-light: #e0f2fe;
+            --text-muted: #94a3b8;
+            --danger-red: #ff4d4d;
+            --code-bg: #070d14;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #060b13;
-            color: #e2e8f0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
         }
 
-        .room-container {
-            background: #0d1726;
-            border: 1px solid #00d2ff;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-            border-radius: 12px;
-            padding: 40px;
+        /* Header & Navigation */
+        header {
+            background: rgba(18, 30, 43, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
             width: 100%;
-            max-width: 600px;
-            text-align: center;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.2);
         }
 
-        h1 {
-            font-size: 32px;
-            color: #ffffff;
-            margin-bottom: 10px;
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
             letter-spacing: 1px;
         }
 
-        .meta {
-            color: #00d2ff;
-            font-weight: bold;
-            margin-bottom: 20px;
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
-        .content-box {
-            background: #0a1220;
-            border: 1px solid #1a2e4c;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: left;
-            margin-bottom: 30px;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .btn-back {
-            background: #101b2d;
-            border: 1px solid #1e3a66;
-            color: #94a3b8;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: bold;
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .btn-exit {
+            background: rgba(255, 77, 77, 0.15);
+            color: var(--danger-red);
+            border: 1px solid var(--danger-red);
+            padding: 0.4rem 1.2rem;
+            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        .btn-back:hover {
-            background: #0077ff;
+        .btn-exit:hover {
+            background: var(--danger-red);
             color: white;
-            border-color: #0077ff;
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            min-height: 75vh;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent-blue);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+            border: 2px solid var(--accent-blue);
+        }
+
+        /* Container & Section Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: var(--accent-blue);
+        }
+
+        /* Circuit & Pinout Layout */
+        .circuit-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .circuit-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .circuit-img img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+        }
+
+        .wiring-table {
+            flex: 1;
+            min-width: 300px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .wiring-table th, .wiring-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        .wiring-table th {
+            color: var(--accent-blue);
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        /* Advanced Code Section */
+        .code-container {
+            background-color: var(--code-bg);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(0, 210, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .code-header span {
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .btn-copy {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: var(--accent-blue);
+        }
+
+        pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+            color: #38bdf8;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Step Procedure */
+        .steps-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            background: var(--card-bg);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            border-radius: 8px;
+            position: relative;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1.2rem;
+            top: 1.5rem;
+            background: var(--accent-blue);
+            color: var(--bg-dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 17, 24, 0.85);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--text-muted);
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background: var(--danger-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #05090d;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(0, 210, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="room-container">
-        <h1>🤖 Project Room 1</h1>
-        <p class="meta">Hardware: Arduino Uno R3 &bull; Sensor: Ultrasonic Distance Sensor</p>
-        
-        <div class="content-box">
-            <h3>Lab Instructions:</h3>
-            <p style="margin-top: 10px; color: #94a3b8; line-height: 1.6;">
-                Welcome to your first robotics lab! In this module, you will wire your Arduino Uno to the Ultrasonic sensor to measure distances and avoid obstacles. Follow the steps provided by your instructor to begin coding.
-            </p>
-        </div>
+    <!-- Navigation Header -->
+    <header>
+        <nav>
+            <div class="logo">ROBOLIGHT</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#circuit">Circuit Diagram</a></li>
+                    <li><a href="#code">Firmware Code</a></li>
+                    <li><a href="#procedure">Assembly Steps</a></li>
+                </ul>
+                <button class="btn-exit" onclick="showExitModal()">Exit ✕</button>
+            </div>
+        </nav>
+    </header>
 
-        <button <a href="main.html"></a><class="btn-back">Return to Hub</button>
+    <!-- Exit Modal -->
+    <div class="modal-overlay" id="exitModal">
+        <div class="modal-box">
+            <h3 style="color: var(--accent-blue); margin-bottom: 1rem;">Exit ROBOLIGHT?</h3>
+            <p style="color: var(--text-muted);">Are you sure you want to leave this engineering guide?</p>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="hideExitModal()">Cancel</button>
+                <button class="btn-confirm" onclick="confirmExit()">Exit</button>
+            </div>
+        </div>
     </div>
 
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-text">
+            <h1>Advanced <span>HC-SR04</span> & Multi-LED Distance Radar</h1>
+            <p>Construct a non-blocking, noise-filtered proximity scanner using Arduino. Features digital moving-average filtering, 3-stage LED zone indicators, and adaptive PWM brightness control.</p>
+            <a href="#code" class="btn">Get Source Code</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcR4obXaMgpEDcR7ASGnlZQ7oW3CIgqhG9w3Pbzm4pahTOOPdRhjxnIBXLayEvw9kQTxCsVIhetBJnDaF74" alt="HC-SR04 Ultrasonic Sensor Detail">
+        </div>
+    </section>
+
+    <!-- Circuit Section -->
+    <section class="container" id="circuit">
+        <h2 class="section-title">Schematic & Pin Mapping</h2>
+        <div class="circuit-grid">
+            <div class="circuit-img">
+                <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQ18DStB3ao7W138CQvf0B9TvMxDUxbOTnEJXvd2JeWVVrlfWKqAtlSYCKnWpZ5VIaUyinY91OoVrLT-M8" alt="Arduino Ultrasonic Breadboard Setup">
+            </div>
+            <div style="flex: 1;">
+                <table class="wiring-table">
+                    <thead>
+                        <tr>
+                            <th>Component Pin</th>
+                            <th>Arduino Connection</th>
+                            <th>Functional Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HC-SR04 VCC</td>
+                            <td>5V Rail</td>
+                            <td>Power supply (5V DC)</td>
+                        </tr>
+                        <tr>
+                            <td>HC-SR04 Trig</td>
+                            <td>Pin 9 (Digital Out)</td>
+                            <td>Triggers 10µs sound pulse</td>
+                        </tr>
+                        <tr>
+                            <td>HC-SR04 Echo</td>
+                            <td>Pin 10 (Digital In)</td>
+                            <td>Measures pulse echo duration</td>
+                        </tr>
+                        <tr>
+                            <td>HC-SR04 GND</td>
+                            <td>GND Rail</td>
+                            <td>Common Ground</td>
+                        </tr>
+                        <tr>
+                            <td>Green LED (+)</td>
+                            <td>Pin 3 (PWM)</td>
+                            <td>Safe Zone (&gt; 30 cm)</td>
+                        </tr>
+                        <tr>
+                            <td>Yellow LED (+)</td>
+                            <td>Pin 5 (PWM)</td>
+                            <td>Warning Zone (15–30 cm)</td>
+                        </tr>
+                        <tr>
+                            <td>Red LED (+)</td>
+                            <td>Pin 6 (PWM)</td>
+                            <td>Critical Zone (&lt; 15 cm)</td>
+                        </tr>
+                        <tr>
+                            <td>LED Cathodes (-)</td>
+                            <td>GND (via 220Ω Resistors)</td>
+                            <td>Current limiting protection</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Code Section -->
+    <section class="container" id="code">
+        <h2 class="section-title">Production-Grade Firmware Code</h2>
+        <div class="code-container">
+            <div class="code-header">
+                <span>Advanced_Ultrasonic_Radar.ino</span>
+                <button class="btn-copy" onclick="copyCode()">Copy Code</button>
+            </div>
+            <pre id="arduinoCode"><code>/*
+ * ROBOLIGHT Advanced Ultrasonic Distance Radar
+ * Architecture: Non-blocking state processing with Moving Average Filter
+ */
+
+// Pin Assignments
+const int TRIG_PIN  = 9;
+const int ECHO_PIN  = 10;
+const int LED_GREEN = 3;  // PWM Capable
+const int LED_YELLOW= 5;  // PWM Capable
+const int LED_RED   = 6;  // PWM Capable
+
+// Filtering Parameters
+const int FILTER_SAMPLES = 5;
+int readBuffer[FILTER_SAMPLES];
+int bufferIndex = 0;
+
+// Non-blocking Timing Variables
+unsigned long previousMillis = 0;
+const long SAMPLE_INTERVAL   = 60; // Sensor pulse cycle interval (ms)
+
+void setup() {
+  Serial.begin(115200);
+  
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  
+  pinMode(LED_GREEN, OUTPUT);
+  pinMode(LED_YELLOW, OUTPUT);
+  pinMode(LED_RED, OUTPUT);
+
+  // Initialize filter buffer
+  for (int i = 0; i < FILTER_SAMPLES; i++) {
+    readBuffer[i] = 0;
+  }
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+
+  // Execute non-blocking sensor acquisition every 60 ms
+  if (currentMillis - previousMillis >= SAMPLE_INTERVAL) {
+    previousMillis = currentMillis;
+
+    int rawDistance = measureDistanceCm();
+    int filteredDistance = applyMovingAverage(rawDistance);
+
+    updateDistanceZones(filteredDistance);
+    
+    // Telemetry output
+    Serial.print("Raw: ");
+    Serial.print(rawDistance);
+    Serial.print(" cm | Filtered: ");
+    Serial.print(filteredDistance);
+    Serial.println(" cm");
+  }
+}
+
+// Low-level hardware pulse calculation
+int measureDistanceCm() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  long duration = pulseIn(ECHO_PIN, HIGH, 30000); // 30ms timeout
+  if (duration == 0) return 400; // Return out-of-range value on timeout
+  
+  return duration * 0.0343 / 2; // Speed of sound calculation
+}
+
+// Digital moving average filter to remove false spikes
+int applyMovingAverage(int newValue) {
+  readBuffer[bufferIndex] = newValue;
+  bufferIndex = (bufferIndex + 1) % FILTER_SAMPLES;
+
+  long sum = 0;
+  for (int i = 0; i < FILTER_SAMPLES; i++) {
+    sum += readBuffer[i];
+  }
+  return sum / FILTER_SAMPLES;
+}
+
+// Zone decision engine & adaptive PWM LED driver
+void updateDistanceZones(int distanceCm) {
+  if (distanceCm > 30) {
+    // Green Zone
+    analogWrite(LED_GREEN, 255);
+    analogWrite(LED_YELLOW, 0);
+    analogWrite(LED_RED, 0);
+  } 
+  else if (distanceCm >= 15 && distanceCm <= 30) {
+    // Yellow Warning Zone - Dynamic Dimming
+    int pwmValue = map(distanceCm, 15, 30, 255, 50);
+    analogWrite(LED_GREEN, 0);
+    analogWrite(LED_YELLOW, pwmValue);
+    analogWrite(LED_RED, 0);
+  } 
+  else {
+    // Red Danger Zone
+    analogWrite(LED_GREEN, 0);
+    analogWrite(LED_YELLOW, 0);
+    analogWrite(LED_RED, 255);
+  }
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Assembly Procedure -->
+    <section class="container" id="procedure">
+        <h2 class="section-title">Execution Procedure</h2>
+        <ol class="steps-list">
+            <li>
+                <h3>Breadboard Power Setup</h3>
+                <p>Connect the 5V and GND pins from your Arduino directly to the power rails of the breadboard to supply electricity to all modules.</p>
+            </li>
+            <li>
+                <h3>Sensor Mount & Signal Wiring</h3>
+                <p>Insert the HC-SR04 module into the breadboard. Run jumpers from VCC to 5V rail, GND to GND rail, Trig to Digital Pin 9, and Echo to Digital Pin 10.</p>
+            </li>
+            <li>
+                <h3>LED Output Array Wiring</h3>
+                <p>Place Green, Yellow, and Red LEDs on the board. Attach a 220Ω resistor from each LED cathode (short leg) to Ground. Connect Green Anode to Pin 3, Yellow Anode to Pin 5, and Red Anode to Pin 6.</p>
+            </li>
+            <li>
+                <h3>Firmware Deployment</h3>
+                <p>Copy the code snippet above into your Arduino IDE, set the baud rate to 115200, compile, and upload to your board.</p>
+            </li>
+        </ol>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 ROBOLIGHT Systems. Advanced Hardware Solutions & Embedded Systems.</p>
+    </footer>
+
+    <!-- Scripts -->
     <script>
-        function goBack() {
-            // Sends the user back to the 50-project dashboard screen
-            window.location.href = "main.html";
+        function showExitModal() {
+            document.getElementById('exitModal').style.display = 'flex';
+        }
+
+        function hideExitModal() {
+            document.getElementById('exitModal').style.display = 'none';
+        }
+
+        function confirmExit() {
+            window.close();
+            setTimeout(() => {
+                window.location.href = "about:blank";
+            }, 100);
+        }
+
+        function copyCode() {
+            const codeText = document.getElementById('arduinoCode').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('Firmware code copied to clipboard!');
+            });
         }
     </script>
+
 </body>
 </html>
