@@ -849,17 +849,7 @@
         }
 
         // Code Verification Execution
-        function submitClassCode() {
-            const codeField = document.getElementById('classCode');
-            const enteredCode = codeField.value;
-
-            if (enteredCode.length !== 8) {
-                alert("Access Denied: Please input a valid 8-digit verification code.");
-                return;
-            }
-
-            alert(`Verifying access key: [${enteredCode}]...\nConnecting to your class stream profile!`);
-        }
+       
 
         // Hardware Card Subroutines
         function connectBoard(boardName) {
