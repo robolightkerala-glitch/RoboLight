@@ -252,6 +252,9 @@
             cursor: pointer;
             width: 100%;
             transition: all 0.2s;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
         }
 
         .btn-connect:hover {
@@ -351,6 +354,79 @@
             color: #ffffff;
             border-color: #64748b;
         }
+
+        /* --- NEW EXTENDED SECTIONS BELOW --- */
+        .card-img-wrapper {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #0b0f19;
+            border: 1px solid #1e293b;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .board-card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .humanoid-hero-banner {
+            background: linear-gradient(180deg, rgba(0,82,204,0.1) 0%, rgba(16,22,37,1) 100%);
+            border: 1px solid #0052cc;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .humanoid-hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .humanoid-hero-content h3 {
+            font-size: 26px;
+            color: #00d2ff;
+            margin-bottom: 12px;
+        }
+
+        .humanoid-hero-content p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .humanoid-hero-img {
+            flex: 1;
+            min-width: 280px;
+            max-height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #1e293b;
+        }
+
+        .humanoid-hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #0052cc, transparent);
+            margin: 60px 0;
+        }
     </style>
 </head>
 <body>
@@ -438,6 +514,281 @@
                             <a href="ardu.html" class="btn-connect">Link Interface</a>
                         </div>
                     </div>
+                </div>
+
+                <div class="divider-line"></div>
+
+                <!-- NEW SECTION 1: Professional Humanoid Robots -->
+                <h2 class="section-title">Professional Humanoid & Advanced Robotics</h2>
+                
+                <div class="humanoid-hero-banner">
+                    <div class="humanoid-hero-content">
+                        <h3>Full-Scale Humanoid Robotics</h3>
+                        <p>Modern professional humanoid platforms mimic human kinematics using bipedal locomotion, high-torque brushless actuators, and real-time spatial vision. Designed to perform complex manual labor, hazard responses, and collaborative manufacturing operations alongside humans.</p>
+                        <ul class="specs-list">
+                            <li><span class="specs-label">Primary Sensors</span> <span>Stereo LiDAR + Depth Cameras</span></li>
+                            <li><span class="specs-label">Degree of Freedom</span> <span>28 to 40+ Movable Joints</span></li>
+                            <li><span class="specs-label">Primary Application</span> <span>Industrial Automation & Assistive Care</span></li>
+                        </ul>
+                    </div>
+                    <div class="humanoid-hero-img">
+                        <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQ9eYh3oVgsgpktSNEcF7K3RdPmswDeob6txWtcbFHAPMQQCf_bsXi4UFSTSAGdP8nQA3V_2YyFjj7CnYA" alt="Professional Humanoid Robot">
+                    </div>
+                </div>
+
+                <div class="divider-line"></div>
+
+                <!-- NEW SECTION 2: 15 Educational & DIY Robotics Toys -->
+                <h2 class="section-title">15 Robotics Toys & Educational Platforms</h2>
+
+                <div class="board-grid">
+
+                    <!-- Toy 1 -->
+                    <div class="board-card">
+                        <div class="card-img-wrapper">
+                            <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcS7o8VpFFpX3RRVP0qqeh41WiyYLvwWfW6wMboJ4Wf3G9zSaILurh2ZDUPKVUU9AbWoQGmLmV5R3-pk_aU" alt="Obstacle Avoiding Robot">
+                        </div>
+                        <div class="board-header">
+                            <div class="board-type">Autonomous Rover</div>
+                            <h3 class="board-name">1. Obstacle Avoiding Bot</h3>
+                            <p class="board-description">Uses ultrasonic sonar sensors (HC-SR04) to continuously map front clearance and recalculate driving direction dynamically.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Primary Sensor</span> <span>Ultrasonic Ranging</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Autonomous Navigation</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Obstacle Avoiding Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 2 -->
+                    <div class="board-card">
+                        <div class="card-img-wrapper">
+                            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSdIBzn9WnjHy_RWhw6scrFQaH-Z4IJNmS_-Y8wHGHBJJOfUkgV7nCQx4_6QRwljQi17FS0-tf2zehPhZo" alt="Line Follower Robot">
+                        </div>
+                        <div class="board-header">
+                            <div class="board-type">Optoelectronic Tracker</div>
+                            <h3 class="board-name">2. Line Following Robot</h3>
+                            <p class="board-description">Relies on infrared (IR) reflection arrays to detect contrast differences and auto-steer precise trajectories along black lines.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Primary Sensor</span> <span>Dual/Quad IR Transceivers</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Factory AGV Routing</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Line Follower Robot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 3 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Bipedal Kinematics</div>
+                            <h3 class="board-name">3. Otto DIY Biped Bot</h3>
+                            <p class="board-description">Open-source interactive dancing bipedal robot powered by micro servos. Teaches fundamental joint positioning and walking algorithms.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Actuators</span> <span>4x SG90 Micro Servos</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Gait & Motion Design</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Otto DIY Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 4 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Manipulator Arm</div>
+                            <h3 class="board-name">4. 4-DOF Robotic Arm</h3>
+                            <p class="board-description">Desktop articulated claw arm designed for pick-and-place tasks using potentiometers or Bluetooth mobile controls.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Control</span> <span>Servo PWM / JoyStick</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Industrial Sorting Prep</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('4-DOF Robotic Arm')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 5 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Self-Balancing</div>
+                            <h3 class="board-name">5. Gyro Two-Wheel Balancer</h3>
+                            <p class="board-description">Utilizes an MPU-6050 accelerometer/gyroscope with PID control feedback loop to maintain upright equilibrium on 2 wheels.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Algorithm</span> <span>PID Closed Loop</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Inverted Pendulum Physics</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Self-Balancing Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 6 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Omni-Directional</div>
+                            <h3 class="board-name">6. Mecanum Wheel Rover</h3>
+                            <p class="board-description">Four-wheel drive vehicle with angled roller wheels allowing instantaneous lateral strafing and 360-degree zero-turn rotation.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Drivetrain</span> <span>Vector Mecanum Wheels</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Tight-Space Maneuvers</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Mecanum Rover')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 7 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Biological Motion</div>
+                            <h3 class="board-name">7. Hexapod Spider Bot</h3>
+                            <p class="board-description">6-legged terrain spider capable of traversing irregular obstacles through inverse kinematics coordinate calculation.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Leg Array</span> <span>18 Micro Servos</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Rough Terrain Exploration</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Hexapod Spider Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 8 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Acoustic Logic</div>
+                            <h3 class="board-name">8. Sound Detection Rover</h3>
+                            <p class="board-description">Responds instantly to clap or frequency triggers through sound microphone modules to start, stop, or change path patterns.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Input Unit</span> <span>Analog Electret Mic</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Acoustic Triggering</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Sound Detection Rover')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 9 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Optics Tracking</div>
+                            <h3 class="board-name">9. Light Following Bug Bot</h3>
+                            <p class="board-description">Uses Photo-Resistor (LDR) sensor pairs to drive toward bright light sources, mimicking phototaxis behaviors seen in nature.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Light Sensor</span> <span>Cadmium-Sulfide LDRs</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Analog Differential Drive</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Light Following Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 10 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Spatial Maze Solver</div>
+                            <h3 class="board-name">10. MicroMouse Maze Bot</h3>
+                            <p class="board-description">Designed for competitive speed maze-solving using wall-distance IR sensors and flood-fill navigation algorithms.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Processing</span> <span>Flood-Fill Routing</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Maze Navigation Speed</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('MicroMouse Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 11 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">RF Telemetry</div>
+                            <h3 class="board-name">11. Bluetooth Remote Car</h3>
+                            <p class="board-description">Connects directly to Android or iOS smartphones over HC-05 serial modules for real-time manual control and speed tuning.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Link Standard</span> <span>Bluetooth SPP / UART</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Wireless Remote Telemetry</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Bluetooth Remote Car')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 12 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">HMI Gestures</div>
+                            <h3 class="board-name">12. Gesture Control Glove Bot</h3>
+                            <p class="board-description">Monitors hand pitch and roll movements using a wearable flex sensor / IMU glove to remotely drive a target vehicle.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Wearable Unit</span> <span>Flex Sensors + Gyro</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Human-Machine Interfaces</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Gesture Control Bot')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 13 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Vision AI</div>
+                            <h3 class="board-name">13. ESP32-CAM Face Tracker</h3>
+                            <p class="board-description">Compact camera-equipped robot capable of detecting human faces and panning a pan-tilt bracket to follow target movement.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Camera</span> <span>OV2640 2MP Lens</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Edge AI Vision Parsing</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('ESP32-CAM Tracker')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 14 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Solar Renewable</div>
+                            <h3 class="board-name">14. Solar-Powered Bug Crawler</h3>
+                            <p class="board-description">Demonstrates sustainable energy conversion using mini solar panels and capacitor banks to drive high-efficiency coreless motors.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Power Source</span> <span>5V Solar Photovoltaic</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Green Energy Robotics</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Solar Crawler')">View Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Toy 15 -->
+                    <div class="board-card">
+                        <div class="board-header">
+                            <div class="board-type">Sub-Surface / Water</div>
+                            <h3 class="board-name">15. Hydrobot Hydraulic Claw</h3>
+                            <p class="board-description">Uses fluid dynamics and syringe piston mechanics to manipulate 3-axis arm positions without electrical battery power.</p>
+                        </div>
+                        <div>
+                            <ul class="specs-list">
+                                <li><span class="specs-label">Mechanism</span> <span>Pascal Law Hydraulics</span></li>
+                                <li><span class="specs-label">Main Usage</span> <span>Fluid Power Principles</span></li>
+                            </ul>
+                            <button class="btn-connect" onclick="connectBoard('Hydraulic Claw')">View Module</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
