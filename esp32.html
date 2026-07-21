@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBOLIGHT | Raspberry Pi Robotics Board</title>
+    <title>ROBOLIGHT | ESP32 Robotics & IoT Board</title>
     <style>
         /* Color Palette & Reset */
         :root {
@@ -278,6 +278,7 @@
         .pinout-img img {
             width: 100%;
             border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
         }
 
         .pinout-info {
@@ -333,7 +334,7 @@
                 <ul class="nav-links">
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="#specs">Specifications</a></li>
-                    <li><a href="#pinout">Pinout & Robotics</a></li>
+                    <li><a href="#pinout">GPIO & Features</a></li>
                 </ul>
                 <button class="btn-exit" onclick="showExitModal()">Exit ✕</button>
             </div>
@@ -355,55 +356,55 @@
     <!-- Hero Section -->
     <section class="hero" id="overview">
         <div class="hero-text">
-            <h1>Power Your Autonomous Future with <span>Raspberry Pi</span></h1>
-            <p>At <strong>ROBOLIGHT</strong>, we integrate cutting-edge single-board computing into high-performance robotics. Discover the brain behind modern smart systems.</p>
-            <a href="#specs" class="btn">Explore Hardware</a>
+            <h1>Next-Gen Wireless Robotics with <span>ESP32</span></h1>
+            <p>At <strong>ROBOLIGHT</strong>, we harness the low-power dual-core performance of the ESP32 chip. Engineered for real-time robotic motor driving, wireless telemetry, and IoT controls.</p>
+            <a href="#specs" class="btn">Explore ESP32 Hardware</a>
         </div>
         <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80" alt="Raspberry Pi Board">
+            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQET2tdTCMFYoEBdIegIkyFc4i20c_6q2DlmwuXp4340c3qHosSpGSHyzy2nKBrY9PEYYCrULHcMjYdioc" alt="ESP32 Development Board">
         </div>
     </section>
 
     <!-- Specifications Section -->
     <section class="container" id="specs">
-        <h2 class="section-title">Board Specifications</h2>
+        <h2 class="section-title">ESP32 Core Specifications</h2>
         <div class="specs-grid">
             <div class="spec-card">
-                <h3>Processor (CPU)</h3>
-                <p>Broadcom Quad-Core ARM Cortex Architecture delivering high performance processing power for complex robotics algorithms.</p>
+                <h3>Dual-Core Processor</h3>
+                <p>Tensilica Xtensa 32-bit LX6 dual-core microprocessors running at up to 240 MHz for high-speed sensor fusion and real-time processing.</p>
             </div>
             <div class="spec-card">
-                <h3>Memory (RAM)</h3>
-                <p>Available in LPDDR4 configurations up to 8GB, enabling computer vision, AI tasks, and real-time path planning.</p>
+                <h3>Wireless Connectivity</h3>
+                <p>Integrated 2.4 GHz Wi-Fi (802.11 b/g/n) and Bluetooth v4.2 BR/EDR & BLE for seamless remote drone and robot manipulation.</p>
             </div>
             <div class="spec-card">
-                <h3>Connectivity</h3>
-                <p>Dual-band Wi-Fi, Bluetooth 5.0, and Gigabit Ethernet for seamless remote control, telemetry, and IoT integration.</p>
+                <h3>Power Efficiency</h3>
+                <p>Ultra-low power (ULP) co-processor allows continuous sensor monitoring while keeping overall battery power consumption minimal.</p>
             </div>
             <div class="spec-card">
-                <h3>Display & Camera</h3>
-                <p>Dual micro-HDMI outputs supporting 4K resolution, plus MIPI CSI/DSI camera ports for vision systems.</p>
+                <h3>Memory & Storage</h3>
+                <p>520 KB SRAM with external flash memory support up to 16 MB to store custom firmware, WebSockets, and control scripts.</p>
             </div>
         </div>
     </section>
 
     <!-- Robotics Pinout Section -->
     <section class="container" id="pinout">
-        <h2 class="section-title">Robotics & Interface Capability</h2>
+        <h2 class="section-title">ESP32 Pinout & Sensor Interfaces</h2>
         <div class="pinout-section">
             <div class="pinout-img">
-                <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80" alt="Microcontroller Electronics Detail">
+                <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQNCz5VNCVAmah7KsQTF9OwT5zmUUB-EN0CQxeyldVG76CyQwvbpoyhTsPKja4Sv5GU00A-YADIx-kK4c" alt="ESP32 Electronics Pinout Module">
             </div>
             <div class="pinout-info">
-                <h3>40-Pin GPIO Header</h3>
+                <h3>Flexible Peripherals</h3>
                 <p style="margin-bottom: 1rem; color: var(--text-muted);">
-                    The heart of all ROBOLIGHT hardware integrations. Connect sensors, motor drivers, and actuators with ease.
+                    Designed for compact robotics modules. Wire up IMUs, motor bridges, ultrasonic sensors, and wireless transceivers directly.
                 </p>
                 <ul>
-                    <li><strong>PWM Control:</strong> Drive servos and DC motor drivers smoothly.</li>
-                    <li><strong>I2C Bus:</strong> Interface with IMUs, accelerometers, and OLED displays.</li>
-                    <li><strong>SPI & UART:</strong> High-speed sensor communications and serial links.</li>
-                    <li><strong>5V & 3.3V Power Pins:</strong> Direct power rails for lightweight electronics modules.</li>
+                    <li><strong>36 GPIO Pins:</strong> Capacitive touch sensing, ADC (Analog-to-Digital), and DAC channels.</li>
+                    <li><strong>PWM Control (LEDC):</strong> Precise Multi-channel PWM signals to control servos, ESCs, and DC motors.</li>
+                    <li><strong>Bus Protocols:</strong> Multiple SPI, I2C, and UART channels for multi-sensor setups.</li>
+                    <li><strong>Built-in Sensors:</strong> Integrated Hall effect sensor and temperature measurement capabilities.</li>
                 </ul>
             </div>
         </div>
@@ -411,7 +412,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 ROBOLIGHT Systems. All rights reserved. Designed for Advanced Robotics.</p>
+        <p>&copy; 2026 ROBOLIGHT Systems. All rights reserved. Powering Smart Microcontrollers & Robotics.</p>
     </footer>
 
     <!-- JavaScript for Exit Handling -->
@@ -425,9 +426,7 @@
         }
 
         function confirmExit() {
-            // Attempt to close window (works if page was opened via script)
             window.close();
-            // Fallback: Redirect to blank/google if browser blocks script close
             setTimeout(() => {
                 window.location.href = "about:blank";
             }, 100);

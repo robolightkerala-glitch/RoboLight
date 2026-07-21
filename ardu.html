@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBOLIGHT | Raspberry Pi Robotics Board</title>
+    <title>ROBOLIGHT | Arduino Robotics Board</title>
     <style>
         /* Color Palette & Reset */
         :root {
@@ -278,6 +278,7 @@
         .pinout-img img {
             width: 100%;
             border-radius: 8px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
         }
 
         .pinout-info {
@@ -333,7 +334,7 @@
                 <ul class="nav-links">
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="#specs">Specifications</a></li>
-                    <li><a href="#pinout">Pinout & Robotics</a></li>
+                    <li><a href="#pinout">I/O & Robotics Interface</a></li>
                 </ul>
                 <button class="btn-exit" onclick="showExitModal()">Exit ✕</button>
             </div>
@@ -355,55 +356,55 @@
     <!-- Hero Section -->
     <section class="hero" id="overview">
         <div class="hero-text">
-            <h1>Power Your Autonomous Future with <span>Raspberry Pi</span></h1>
-            <p>At <strong>ROBOLIGHT</strong>, we integrate cutting-edge single-board computing into high-performance robotics. Discover the brain behind modern smart systems.</p>
-            <a href="#specs" class="btn">Explore Hardware</a>
+            <h1>Master Physical Computing with <span>Arduino</span></h1>
+            <p>At <strong>ROBOLIGHT</strong>, we bring open-source prototyping to life. Built around robust AVR microcontrollers, our Arduino setup offers instant sensor response and reliable real-time motor control.</p>
+            <a href="#specs" class="btn">Explore Arduino Hardware</a>
         </div>
         <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80" alt="Raspberry Pi Board">
+            <img src="https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=800&q=80" alt="Arduino Microcontroller Board">
         </div>
     </section>
 
     <!-- Specifications Section -->
     <section class="container" id="specs">
-        <h2 class="section-title">Board Specifications</h2>
+        <h2 class="section-title">Arduino Core Specifications</h2>
         <div class="specs-grid">
             <div class="spec-card">
-                <h3>Processor (CPU)</h3>
-                <p>Broadcom Quad-Core ARM Cortex Architecture delivering high performance processing power for complex robotics algorithms.</p>
+                <h3>Microcontroller</h3>
+                <p>ATmega328P 8-bit RISC architecture running at 16 MHz clock speed, delivering reliable deterministic execution for robotics tasks.</p>
             </div>
             <div class="spec-card">
-                <h3>Memory (RAM)</h3>
-                <p>Available in LPDDR4 configurations up to 8GB, enabling computer vision, AI tasks, and real-time path planning.</p>
+                <h3>Operating Voltage</h3>
+                <p>Standard 5V logic operating level with support for 7V–12V unregulated external DC input for direct battery pack power.</p>
             </div>
             <div class="spec-card">
-                <h3>Connectivity</h3>
-                <p>Dual-band Wi-Fi, Bluetooth 5.0, and Gigabit Ethernet for seamless remote control, telemetry, and IoT integration.</p>
+                <h3>Memory Architecture</h3>
+                <p>32 KB Flash Memory (with 0.5 KB used by bootloader), 2 KB SRAM, and 1 KB EEPROM for persistent setting storage.</p>
             </div>
             <div class="spec-card">
-                <h3>Display & Camera</h3>
-                <p>Dual micro-HDMI outputs supporting 4K resolution, plus MIPI CSI/DSI camera ports for vision systems.</p>
+                <h3>Shield Ecosystem</h3>
+                <p>Standard header pin footprint supporting thousands of plug-and-play expansion shields for motor drivers, GPS, and relays.</p>
             </div>
         </div>
     </section>
 
     <!-- Robotics Pinout Section -->
     <section class="container" id="pinout">
-        <h2 class="section-title">Robotics & Interface Capability</h2>
+        <h2 class="section-title">Arduino I/O & Sensor Header</h2>
         <div class="pinout-section">
             <div class="pinout-img">
-                <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=800&q=80" alt="Microcontroller Electronics Detail">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Arduino Circuit Electronics Detail">
             </div>
             <div class="pinout-info">
-                <h3>40-Pin GPIO Header</h3>
+                <h3>Flexible Input/Output</h3>
                 <p style="margin-bottom: 1rem; color: var(--text-muted);">
-                    The heart of all ROBOLIGHT hardware integrations. Connect sensors, motor drivers, and actuators with ease.
+                    Direct low-latency hardware control. Hook up ultrasonic sensors, line-following IR modules, and servo motors effortlessly.
                 </p>
                 <ul>
-                    <li><strong>PWM Control:</strong> Drive servos and DC motor drivers smoothly.</li>
-                    <li><strong>I2C Bus:</strong> Interface with IMUs, accelerometers, and OLED displays.</li>
-                    <li><strong>SPI & UART:</strong> High-speed sensor communications and serial links.</li>
-                    <li><strong>5V & 3.3V Power Pins:</strong> Direct power rails for lightweight electronics modules.</li>
+                    <li><strong>14 Digital I/O Pins:</strong> Precise digital read and write operations for switches, LEDs, and sensors.</li>
+                    <li><strong>6 PWM Outputs:</strong> Hardware-based 8-bit pulse-width modulation for smooth motor speed control.</li>
+                    <li><strong>6 Analog Inputs (ADC):</strong> 10-bit analog channels to read analog sensor voltages (0V–5V).</li>
+                    <li><strong>Dedicated Communication:</strong> Built-in UART Serial (TX/RX), SPI, and I2C (TWI) bus headers.</li>
                 </ul>
             </div>
         </div>
@@ -411,7 +412,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 ROBOLIGHT Systems. All rights reserved. Designed for Advanced Robotics.</p>
+        <p>&copy; 2026 ROBOLIGHT Systems. All rights reserved. Powering Arduino Robotics & Automation.</p>
     </footer>
 
     <!-- JavaScript for Exit Handling -->
@@ -425,9 +426,7 @@
         }
 
         function confirmExit() {
-            // Attempt to close window (works if page was opened via script)
             window.close();
-            // Fallback: Redirect to blank/google if browser blocks script close
             setTimeout(() => {
                 window.location.href = "about:blank";
             }, 100);
